@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<?xml-stylesheet href="chrome://foursquarecheckin/skin/skin.css" type="text/css"?>
+<!DOCTYPE linktargetfinder SYSTEM "chrome://foursquarecheckin/locale/translations.dtd">
+<overlay id="sample" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+		<script src="foursquareCheckin.js" />
+
+		<statusbar id="status-bar">
+			<statusbarpanel id="foursquarecheckin-statusbarpanel" class="statusbarpanel-iconic" src="chrome://foursquarecheckin/skin/foursquare24.png" tooltiptext="&runfoursquarecheckin;" onclick="foursquareCheckin.run()" >
+				<image id="foursquarecheckin-statusbarpanel-icon" />
+			</statusbarpanel>
+		</statusbar>
+				
+</overlay>

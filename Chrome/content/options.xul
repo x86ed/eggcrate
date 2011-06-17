@@ -1,0 +1,47 @@
+<?xml version="1.0"?>
+<?xml-stylesheet href="chrome://global/skin/" type="text/css"?>
+
+<prefwindow
+     title="Foursquare Checkin Preferences"
+     xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+
+	<prefpane label="Foursquare Checkin Preferences">
+		<preferences>
+			<preference id="foursquare-token" name="extensions.foursquarecheckin.token" type="unichar"/>
+			<preference id="foursquare-username" name="extensions.foursquarecheckin.username" type="unichar"/>
+			<preference id="foursquare-facebook" name="extensions.foursquarecheckin.facebook" type="bool"/>
+			<preference id="foursquare-twitter" name="extensions.foursquarecheckin.twitter" type="bool"/>			
+		</preferences>
+
+		<groupbox>
+			<caption label="Settings"/>
+			<grid>
+				<columns>
+					<column flex="4"/>
+
+					<column flex="1"/>
+				</columns>
+				<rows>
+					<row>
+						<label control="token" value="Token"/>
+						<textbox id="token" preference="foursquare-token"/>
+					</row>
+					<row>
+						<label control="username" value="UserName"/>
+						<textbox id="username" preference="foursquare-username"/>
+					</row>
+					<row>
+						<label control="facebook" value="Facebook is connected"/>
+						<checkbox id="facebook" preference="foursquare-facebook"/>
+					</row>
+					<row>
+						<label control="twitter" value="Twitter is connected"/>
+						<checkbox id="twitter" preference="foursquare-twitter"/>
+					</row>
+				</rows>
+			</grid>
+		</groupbox>	
+
+	</prefpane>
+
+</prefwindow>
