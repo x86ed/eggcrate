@@ -4,22 +4,22 @@
   "description" : "Stores all your social media where you want it",
   "background_page" : "background.html",
    "browser_action": {
-    "default_icon": "icons/icon-19.png",
+    "default_icon": "/skin/icons/icon-19.png",
     "default_title": "eggCrate",
     "default_popup": "popup.html"
    },
    "content_scripts": [
         {
             "matches": ["http://*/*"],
-            "js" : ["/js/jquery-1.6.1.min.js","processing-1.2.1.min.js", "processing-1.2.1-api.min.js", "/js/content.js"],
+            "js" : ["/Chrome/content/js/jquery-1.6.1.min.js","processing-1.2.1.min.js", "processing-1.2.1-api.min.js", "/Chrome/content/js/content.js"],
             "run_at": "document_start"
         }
    ],
   "minimum_chrome_version" : "6.0.0.0",
-  "icons" : {
-    "16" : "icons/icon-16.png",
-    "48" : "icons/icon-48.png",
-    "128" : "icons/icon-128.png"
+  "/skin/icons" : {
+    "16" : "/skin/icons/icon-16.png",
+    "48" : "/skin/icons/icon-48.png",
+    "128" : "/skin/icons/icon-128.png"
   },
   "permissions": [
     "notifications",
