@@ -7,8 +7,7 @@ var xBport = function(portName,portDesc=portName){
 	this.addListener(callback) = portname.onMessage.addListener(callback);
 	this.postMessage(msgObj) = portname.postMessage(msgObj);
 };
-var 
-$ff?
+$ff.length?xBport = 
 
 //everything is wrapped in JQuery 
 $(document).ready(function(){
