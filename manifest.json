@@ -2,7 +2,7 @@
   "name" : "eggCrate",
   "version" : "0",
   "description" : "Stores all your social media where you want it",
-  "background_page" : "background.html",
+  "background_page" : "/content/background.html",
    "browser_action": {
     "default_icon": "/skin/icons/icon-19.png",
     "default_title": "eggCrate",
@@ -11,7 +11,11 @@
    "content_scripts": [
         {
             "matches": ["http://*/*"],
-            "js" : ["/Chrome/content/js/jquery-1.6.1.min.js","processing-1.2.1.min.js", "processing-1.2.1-api.min.js", "/Chrome/content/js/content.js"],
+            "js" : ["/content/js/jquery-1.6.1.min.js",
+            		"/content/js/processing-1.2.1.min.js", 
+            		"/content/js/processing-1.2.1-api.min.js", 
+            		"/content/js/content.js",
+            		"/content/js/poc.js"],
             "run_at": "document_start"
         }
    ],

@@ -1,5 +1,6 @@
-content     eggcrate    chrome/content/
-content     eggcrate    chrome/content/ contentaccessible=yes
+content     eggcrate    content/
+content     eggcrate    content/ contentaccessible=yes
+
 overlay chrome://browser/content/browser.xul chrome://eggcrate/content/browser.xul
 
 locale	eggcrate	en-US	locale/en-US/
