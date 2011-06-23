@@ -68,4 +68,5 @@ var poc = function () {
 		}
 	};
 }();
-window.addEventListener(poc.DOMEvent("load"), poc.run, false);
+//window.addEventListener(poc.DOMEvent("load"), poc.run, false);
+
