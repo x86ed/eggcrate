@@ -1,3 +1,4 @@
+/*
 var $ff = false;
 
 //port object crossbrowser compatable
@@ -18,4 +19,13 @@ $(document).ready(function(){
 
 
 
+});
+
+*/
+console.log(poc);
+console.log(poc.run);
+
+
+$(document).ready(function(){
+	 //poc.run();
 });

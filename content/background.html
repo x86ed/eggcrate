@@ -1,9 +1,22 @@
 <!DOCTYPE html>
+
 <html>
   <head>
   </head>
   <body>
-    <script>
+    <script>	
+	function onRequest(request, sender, callback) {
+		switch(request.action){
+			default:
+				console.log("request not handled");
+				callback();
+				break;
+		}
+	};
+
+	// Wire up the listener.
+	chrome.extension.onRequest.addListener(onRequest);
+	  
     </script>
   </body>
 </html>
