@@ -1,23 +1,50 @@
 var poc = function () {
-	var prefManager = Components.classes["@mozilla.org/preferences-service;1"].getService(Components.interfaces.nsIPrefBranch);
+	//var prefManager = Components.classes["@mozilla.org/preferences-service;1"].getService(Components.interfaces.nsIPrefBranch);	
+	
 	return {
-		init : function () {
-			gBrowser.addEventListener("load", function () {
-				var autoRun = prefManager.getBoolPref("extensions.linktargetfinder.autorun");
-				if (autoRun) {
-					poc.run();
+		
+		browserType : {
+			chrome : "chrome",
+			firefox : "firefox"
+		},
+		
+		getBrowser : function(){
+			return navigator.userAgent.indexOf("Firefox") != -1 ? poc.browserType.firefox : poc.browserType.chrome;
+		},
+		
+		getDOM : function(){
+			
+			switch(poc.getBrowser()){
+				case poc.browserType.chrome:
+					dom = document;
+					break;
+				case poc.browserType.firefox:
+					dom = content.document;
+					break;
+			}
+			return dom;
+		},
+		
+		DOMEvent : function(event){ 
+				
+			if(poc.getBrowser() == poc.browserType.firefox)
+				switch(event){
+					case "load":
+						event = "DOMContentLoaded";
+						break;
 				}
-			}, false);
+			
+			return event;
 		},
 			
 		run : function () {
-			var head = content.document.getElementsByTagName("head")[0],
-				style = content.document.getElementById("link-target-finder-style"),
-				allLinks = content.document.getElementsByTagName("a"),
+			var head = poc.getDOM().getElementsByTagName("head")[0],
+				style = poc.getDOM().getElementById("link-target-finder-style"),
+				allLinks = poc.getDOM().getElementsByTagName("a"),
 				foundLinks = 0;
 			
 			if (!style) {
-				style = content.document.createElement("link");
+				style = poc.getDOM().createElement("link");
 				style.id = "link-target-finder-style";
 				style.type = "text/css";
 				style.rel = "stylesheet";
@@ -41,4 +68,4 @@ var poc = function () {
 		}
 	};
 }();
-window.addEventListener("load", poc.init, false);
+window.addEventListener(poc.DOMEvent("load"), poc.run, false);
