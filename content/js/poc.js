@@ -113,6 +113,6 @@ var canvas = document.getElementById("canvas1");
 var p = new Processing(canvas, sketchProc);  
   //p.exit(); to detach it 
 $('body').click(function(){
-  $("#canvas1").animate({ left: '+=' + (10 * Math.random()), top: '+=' (10 * Math.random())},5000);
+  $("#canvas1").animate({ left: '+=' + (10 * Math.random()), top: '+='+ (10 * Math.random())},5000);
 });
 });
