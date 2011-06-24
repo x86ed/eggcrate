@@ -46,7 +46,7 @@ if(adaptor.getBrowser() == adaptor.browserType.firefox){
 	adaptor.loadjQuery(adaptor);
 	var jQuery = adaptor.jQuery;
 	var $ = function(selector,context){
-	   return new &nbsp;jQuery.fn.init(selector,context||window._content.document);
+	   return new jQuery.fn.init(selector,context||window._content.document);
 	};
 	$.fn = $.prototype = jQuery.fn;
 	yourObj.env=window._content.document;
