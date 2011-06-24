@@ -3,11 +3,20 @@ var facebook = function() {
 	return{
 		
 		getFeed : function(method, url, callback){
-			utility.ajax(url, method, callback, facebook.getFeedComplete);
+			console.log("get feed");
+			
+			request = {
+					url : url,
+					method : method,
+					func : callback,
+					callback : facebook.getFeedComplete
+			};
+			
+			utility.ajax(request);
 		},
 		
 		getFeedComplete : function(response, method, callback){
-			alert("feed complete");
+			console.log("get feed complete");
 			switch(method){
 				case utility.method.oauth:
 					feedItems = facebook.parseOauth(response);
