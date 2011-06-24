@@ -22,8 +22,8 @@ $(document).ready(function(){
 });
 
 */
-console.log(poc);
-console.log(poc.run);
+//console.log(poc);
+//console.log(poc.run);
 
 
 $(document).ready(function(){
