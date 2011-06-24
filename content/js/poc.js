@@ -42,7 +42,18 @@ var poc = function () {
 
 //window.addEventListener(poc.DOMEvent("load"), poc.run, false);
 
- $(adaptor.getDOM).ready(function(){
+if(adaptor.getBrowser() == adaptor.browserType.firefox){
+	adaptor.loadjQuery(adaptor);
+	var jQuery = adaptor.jQuery;
+	var $ = function(selector,context){
+	   return new &nbsp;jQuery.fn.init(selector,context||window._content.document);
+	};
+	$.fn = $.prototype = jQuery.fn;
+	yourObj.env=window._content.document;
+}
+
+
+ $(document).ready(function(){
  alert("i piss rainbows")
  
 $('body').prepend('<canvas style="position:absolute;top:0;left:0" id="canvas1" width="200" height="200"></canvas>')
