@@ -1,38 +1,51 @@
 {
   "name" : "eggCrate",
+  
   "version" : "0",
+  
   "description" : "Stores all your social media where you want it",
+  
   "background_page" : "/content/background.html",
-   "browser_action": {
-    "default_icon": "/skin/icons/icon-19.png",
-    "default_title": "eggCrate"
-   },
-   "content_scripts": [
-        {
-            "matches": ["http://*/*"],
-            "js" : [
-            		"/content/js/jquery-1.6.1.min.js",
-            		"/content/js/processing-1.2.1.min.js", 
-            		"/content/js/processing-1.2.1-api.min.js", 
-            		"/content/js/content.js",
-                "/content/js/poc.js"
-            		],
-            "run_at": "document_start",
-            "css" : ["/skin/skin.css"]
-        }
-   ],
+  
+  "browser_action": {
+					    "default_icon": "/skin/icons/icon-19.png",
+					    "default_title": "eggCrate"
+   					},
+   					
+  "content_scripts": [
+				        {
+				            "matches": [
+				                        "http://*/*",
+				                        "https://*/*"
+				                        ],
+				            "js" : ["/content/js/adaptor.js",
+				                    "/content/js/services/utility.js",
+				                    "/content/js/services/facebook.js",
+				                    "/content/js/poc.js",
+				            		"/content/js/jquery-1.6.1.min.js",
+				            		"/content/js/processing-1.2.1.min.js", 
+				            		"/content/js/processing-1.2.1-api.min.js", 
+				            		"/content/js/content.js"
+				            		],
+				            "run_at": "document_start",
+				            "css" : ["/skin/skin.css"]
+				        }
+		        	],
+		        	
   "minimum_chrome_version" : "6.0.0.0",
+  
   "/skin/icons" : {
-    "16" : "/skin/icons/icon-16.png",
-    "48" : "/skin/icons/icon-48.png",
-    "128" : "/skin/icons/icon-128.png"
-  },
+				    "16" : "/skin/icons/icon-16.png",
+				    "48" : "/skin/icons/icon-48.png",
+				    "128" : "/skin/icons/icon-128.png"
+				  },
+				  
   "permissions": [
-    "notifications",
-    "contextMenus",
-    "tabs",
-    "http://fonts.googleapis.com/",
-    "http://*/*",
-    "https://*/*"
-  ]
+				    "notifications",
+				    "contextMenus",
+				    "tabs",
+				    "http://fonts.googleapis.com/",
+				    "http://*/*",
+				    "https://*/*"
+				  ]
 }
