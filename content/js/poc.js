@@ -52,7 +52,8 @@ if(adaptor.getBrowser() == adaptor.browserType.firefox){
 }
 
 
- $(document).ready(function(){
+ alert("golf wang")
+ $().ready(function(){
  alert("i piss rainbows")
  
 $('body').prepend('<canvas style="position:absolute;top:0;left:0" id="canvas1" width="200" height="200"></canvas>')
