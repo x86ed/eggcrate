@@ -71,7 +71,7 @@ var poc = function () {
 //window.addEventListener(poc.DOMEvent("load"), poc.run, false);
 
  $(document).ready(function(){
-  $('body').prepend("<canvas style="position:absolute;top:0;left:0" id="canvas1" width="200" height="200"></canvas>")
+  $('body').prepend('<canvas style="position:absolute;top:0;left:0" id="canvas1" width="200" height="200"></canvas>')
 function sketchProc(processing) {  
   // Override draw function, by default it will be called 60 times per second  
   processing.draw = function() {  
