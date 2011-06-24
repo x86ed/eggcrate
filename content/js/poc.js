@@ -107,8 +107,8 @@ function sketchProc(processing) {
   };  
     
 }  
-  
-var canvas = $("#canvas1");  
+var canvas = document.getElementById("canvas1");
+//var canvas = $("#canvas1");  
 // attaching the sketchProc function to the canvas  
 var p = new Processing(canvas, sketchProc);  
   //p.exit(); to detach it 
