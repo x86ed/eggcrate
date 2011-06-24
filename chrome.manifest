@@ -1,0 +1,9 @@
+content     eggcrate    content/
+content     eggcrate    content/ contentaccessible=yes
+
+overlay chrome://browser/content/browser.xul chrome://eggcrate/content/browser.xul
+
+locale	eggcrate	en-US	locale/en-US/
+
+skin	eggcrate	classic/1.0	skin/
+style	chrome://global/content/customizeToolbar.xul	chrome://eggcrate/skin/skin.css
