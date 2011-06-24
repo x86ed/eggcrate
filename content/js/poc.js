@@ -40,7 +40,6 @@ var poc = function () {
 	};
 }();
 
-//window.addEventListener(poc.DOMEvent("load"), poc.run, false);
 
 if(adaptor.getBrowser() == adaptor.browserType.firefox){
 	adaptor.loadjQuery(adaptor);
