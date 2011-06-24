@@ -3,14 +3,17 @@ var poc = function () {
 	return {
 					
 		run : function () {
-			var head = adaptor.getDOM().getElementsByTagName("head")[0],
-				style = adaptor.getDOM().getElementById("link-target-finder-style"),
-				allLinks = adaptor.getDOM().getElementsByTagName("a"),
+			var DOM = adaptor.getDOM();
+			alert("running");
+			
+			var head = DOM.getElementsByTagName("head")[0],
+				style = DOM.getElementById("link-target-finder-style"),
+				allLinks = DOM.getElementsByTagName("a"),
 				foundLinks = 0;
 			
 			if(adaptor.getBrowser() == adaptor.browserType.firefox)
 				if (!style) {
-					style = adaptor.getDOM().createElement("link");
+					style = DOM.createElement("link");
 					style.id = "link-target-finder-style";
 					style.type = "text/css";
 					style.rel = "stylesheet";

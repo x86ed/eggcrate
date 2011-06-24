@@ -15,16 +15,32 @@ var adaptor = function () {
 		},
 		
 		getDOM : function(){
+			dom = null;
 			
 			switch(adaptor.getBrowser()){
 				case adaptor.browserType.chrome:
 					dom = document;
 					break;
 				case adaptor.browserType.firefox:
-					dom = content.document;
+					if(content != null)
+						dom = content.document;
 					break;
 			}
 			return dom;
+		},
+		
+		init : function(func){
+			switch(adaptor.getBrowser()){
+			case adaptor.browserType.chrome:
+				window.addEventListener(adaptor.DOMEvent("load"), func, false);
+				break;
+			case adaptor.browserType.firefox:
+				window.addEventListener("load", function(){
+					if(gBrowser) 
+						gBrowser.addEventListener("DOMContentLoaded", func, false);
+				}, false);
+				break;
+			}
 		},
 		
 		DOMEvent : function(event){ 
@@ -37,6 +53,22 @@ var adaptor = function () {
 				}
 			
 			return event;
+		},
+		
+		ajaxRequest : function(ajaxRequest, callback){
+			switch(adaptor.getBrowser()){
+				case adaptor.browserType.chrome:
+					request = {
+						"action" : "ajax",
+						"ajaxRequest" : ajaxRequest
+					};								
+					chrome.extension.sendRequest(request, callback);
+					break;
+					
+				default:
+					utility.ajaxSend(ajaxRequest, callback);
+					break;			
+			}			
 		},
 		loadjQuery : function(context){
 			var loader = Components.classes["@mozilla.org/moz/jssubscript-loader;1"].getService(Components.interfaces.mozIJSSubScriptLoader);

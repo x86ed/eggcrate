@@ -9,25 +9,12 @@ var utility = function() {
 		},
 		
 		ajax : function(ajaxRequest){
-			console.log("ajax");
-			console.log(ajaxRequest);
 			
 			callback = function(response){
-				console.log("callback");
 				ajaxRequest.callback(response, ajaxRequest.method, ajaxRequest.func);
 			};
 			
-			if(adaptor.getBrowser() == adaptor.browserType.chrome){
-				console.log("ajax - chrome");
-				request = {
-						"action" : "ajax",
-						"ajaxRequest" : ajaxRequest
-				};				
-				
-				chrome.extension.sendRequest(request, callback);
-			}else{
-				utility.ajaxSend(ajaxRequest, callback);
-			}
+			adaptor.ajaxRequest(ajaxRequest, callback);
 		},
 		
 		ajaxSend : function(ajaxRequest, callback){
