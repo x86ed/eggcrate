@@ -2,6 +2,10 @@
 <?xml-stylesheet href="chrome://eggcrate/skin/skin.css" type="text/css"?> 
 <!DOCTYPE linktargetfinder SYSTEM "chrome://eggcrate/locale/translations.dtd">
 <overlay id="sample" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+    <script="js/jquery-1.6.1.min.js" />
+    <script src="js/processing-1.2.1.min.js"/> 
+    <script src="js/processing-1.2.1-api.min.js"/>
+    <script src="js/content.js"/>
 		<script src="js/poc.js" />
 		
 		<menupopup id="menu_ToolsPopup"> 
