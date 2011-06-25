@@ -36,7 +36,7 @@ var adaptor = function () {
 				break;
 			case adaptor.browserType.firefox:
 				window.addEventListener("load", function(){
-					if(gBrowser) 
+					if(gBrowser)
 						gBrowser.addEventListener("DOMContentLoaded", func, false);
 				}, false);
 				break;
