@@ -70,6 +70,19 @@ var adaptor = function () {
 					break;			
 			}			
 		},
+		
+		initjQuery : function (){
+			if(adaptor.getBrowser() == adaptor.browserType.firefox){
+				adaptor.loadjQuery(adaptor);
+				var jQuery = adaptor.jQuery;
+				var $ = function(selector,context){
+				   return new jQuery.fn.init(selector,context||window._content.document);
+				};
+				$.fn = $.prototype = jQuery.fn;
+				adaptor.env=window._content.document;
+			}
+		},
+		
 		loadjQuery : function(context){
 			var loader = Components.classes["@mozilla.org/moz/jssubscript-loader;1"].getService(Components.interfaces.mozIJSSubScriptLoader);
 			loader.loadSubScript("chrome://eggcrate/content/js/jquery-1.6.1.min.js",context);
