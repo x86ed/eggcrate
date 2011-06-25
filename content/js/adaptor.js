@@ -32,7 +32,7 @@ var adaptor = function () {
 		init : function(func){
 			switch(adaptor.getBrowser()){
 			case adaptor.browserType.chrome:
-				window.addEventListener(adaptor.DOMEvent("load"), func, false);
+				window.addEventListener("load", func, false);
 				break;
 			case adaptor.browserType.firefox:
 				adaptor.loadjQuery(adaptor);
