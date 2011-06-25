@@ -35,24 +35,13 @@ var adaptor = function () {
 				window.addEventListener(adaptor.DOMEvent("load"), func, false);
 				break;
 			case adaptor.browserType.firefox:
+				adaptor.loadjQuery(adaptor);
 				window.addEventListener("load", function(){
 					if(gBrowser)
 						gBrowser.addEventListener("DOMContentLoaded", func, false);
 				}, false);
 				break;
 			}
-		},
-		
-		DOMEvent : function(event){ 
-				
-			if(adaptor.getBrowser() == adaptor.browserType.firefox)
-				switch(event){
-					case "load":
-						event = "DOMContentLoaded";
-						break;
-				}
-			
-			return event;
 		},
 		
 		ajaxRequest : function(ajaxRequest, callback){
@@ -73,7 +62,6 @@ var adaptor = function () {
 		
 		initjQuery : function (){
 			if(adaptor.getBrowser() == adaptor.browserType.firefox){
-				adaptor.loadjQuery(adaptor);
 				var jQuery = adaptor.jQuery;
 				var $ = function(selector,context){
 				   return new jQuery.fn.init(selector,context||window._content.document);
