@@ -64,10 +64,12 @@ var adaptor = function () {
 			if(adaptor.getBrowser() == adaptor.browserType.firefox){
 				var jQuery = adaptor.jQuery;
 				var $ = function(selector,context){
-				   return new jQuery.fn.init(selector,context||window._content.document);
+					return new jQuery.fn.init(selector, context);
+					//return new jQuery.fn.init(selector,context||window._content.document);
 				};
 				$.fn = $.prototype = jQuery.fn;
-				adaptor.env=window._content.document;
+				//adaptor.env=context;
+				//adaptor.env=window._content.document;
 			}
 		},
 		
