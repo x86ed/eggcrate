@@ -47,9 +47,14 @@ var poc = function () {
 		},
 		
 		clock : function(){
-			alert("i piss rainbows")
+			alert("i piss rainbows");
 			
-			alert($('body'));
+			context = content.document;
+			body = $('body', context);
+			body.css('color', 'red');
+			body.append( ' <div>hello asshole 3</div> ' );
+			
+			//return;
 			
 			$('body').prepend('<canvas style="position:absolute;top:0;left:0" id="canvas1" width="200" height="200"></canvas>')
 			
