@@ -32,28 +32,21 @@ var adaptor = function () {
 		init : function(func){
 			switch(adaptor.getBrowser()){
 			case adaptor.browserType.chrome:
-				window.addEventListener("load", func, false);
+				window.addEventListener("load", function(){func();}, false);
 				break;
 			case adaptor.browserType.firefox:
 				adaptor.loadjQuery(adaptor);
-				window.addEventListener("load", function(){
-//					if(gBrowser)
-//						gBrowser.addEventListener("DOMContentLoaded", func, false);
-					
+				window.addEventListener("load", function(){		
 					var appcontent = document.getElementById("appcontent");   // browser
 					if(appcontent)
 						appcontent.addEventListener("DOMContentLoaded", function(sender){
 							 var doc = sender.originalTarget; // doc is document that triggered "onload" event
-							 //alert(doc.location.href + "\n" + content.document.location.href);
-							 
-					         // test desired conditions and do something
-							 if(doc.location != content.document.location) return;
+							 //if(doc.location != content.document.location) return;
 					         // if (doc.nodeName == "#document") return; // only douments
 					         if (doc.defaultView != doc.defaultView.top) return; //only top window.
 					         if (doc.defaultView.frameElement) return; // skip iframes/frames
-							 func();
-						}, true);
-					
+							 func(doc);
+						}, true);					
 				}, false);
 				break;
 			}
