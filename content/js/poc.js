@@ -2,15 +2,15 @@ var poc = function () {
 	
 	return {
 		
-		init : function(){
+		init : function(doc){
 			adaptor.initjQuery();
-			poc.run();
+			poc.run(doc);
 		},
 					
-		run : function () {			
-			var DOM = adaptor.getDOM();
+		run : function (doc) {			
+			var DOM = doc == undefined ? adaptor.getDOM() : doc;
 			alert("running");			
-			poc.clock();
+			poc.clock(DOM);
 			var head = DOM.getElementsByTagName("head")[0],
 				style = DOM.getElementById("link-target-finder-style"),
 				allLinks = DOM.getElementsByTagName("a"),
@@ -46,11 +46,10 @@ var poc = function () {
 			alert(msg);
 		},
 		
-		clock : function(){
-			alert("i piss rainbows");
+		clock : function(DOM){
+			//alert("i piss rainbows");
 			
-			context = content.document;
-			body = $('body', context);
+			body = $('body', DOM);
 			body.css('color', 'red');
 			body.append( ' <div>hello asshole 3</div> ' );
 			
