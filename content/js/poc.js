@@ -7,7 +7,7 @@ var poc = function () {
 			poc.run();
 		},
 					
-		run : function () {
+		run : function () {			
 			var DOM = adaptor.getDOM();
 			alert("running");			
 			poc.clock();
