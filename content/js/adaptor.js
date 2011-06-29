@@ -37,8 +37,23 @@ var adaptor = function () {
 			case adaptor.browserType.firefox:
 				adaptor.loadjQuery(adaptor);
 				window.addEventListener("load", function(){
-					if(gBrowser)
-						gBrowser.addEventListener("DOMContentLoaded", func, false);
+//					if(gBrowser)
+//						gBrowser.addEventListener("DOMContentLoaded", func, false);
+					
+					var appcontent = document.getElementById("appcontent");   // browser
+					if(appcontent)
+						appcontent.addEventListener("DOMContentLoaded", function(sender){
+							 var doc = sender.originalTarget; // doc is document that triggered "onload" event
+							 //alert(doc.location.href + "\n" + content.document.location.href);
+							 
+					         // test desired conditions and do something
+							 if(doc.location != content.document.location) return;
+					         // if (doc.nodeName == "#document") return; // only douments
+					         if (doc.defaultView != doc.defaultView.top) return; //only top window.
+					         if (doc.defaultView.frameElement) return; // skip iframes/frames
+							 func();
+						}, true);
+					
 				}, false);
 				break;
 			}
