@@ -14,7 +14,7 @@
 		switch(request.action){
 			
 			case "ajax":			
-				utility.ajaxSend(request.ajaxRequest, callback);
+				utility.ajax(request.ajaxRequest, callback);
 				break;
 			default:
 				console.log("request not handled");
