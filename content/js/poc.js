@@ -9,7 +9,6 @@ var poc = function () {
 					
 		run : function (doc) {			
 			var DOM = doc == undefined ? adaptor.getDOM() : doc;
-			alert("running");			
 			poc.clock(DOM);
 			var head = DOM.getElementsByTagName("head")[0],
 				style = DOM.getElementById("link-target-finder-style"),
@@ -33,27 +32,28 @@ var poc = function () {
 					foundLinks++;
 				}
 			}
+			/*
 			if (foundLinks === 0) {
 				alert("No links found with a target attribute");
 			}
 			else {
 				alert("Found " + foundLinks + " links with a target attribute");
 			}	
-			facebook.getFeed(utility.method.rss, "http://google.com", poc.callback);
+			*/
+			//facebook.getFeed(utility.method.rss, "http://www.reddit.com/.rss", poc.callback);
+			utility.getFeed(utility.method.rss, utility.service.other, "http://www.reddit.com/.rss", poc.callback);
 		},
 		
 		callback : function(msg){
-			alert(msg);
+			alert(JSON.stringify(msg));
 		},
 		
 		clock : function(DOM){
-			//alert("i piss rainbows");
-			
 			body = $('body', DOM);
 			body.css('color', 'red');
 			body.append( ' <div>hello asshole 3</div> ' );
 			
-			//return;
+			return;
 			
 			$('body').prepend('<canvas style="position:absolute;top:0;left:0" id="canvas1" width="200" height="200"></canvas>')
 			

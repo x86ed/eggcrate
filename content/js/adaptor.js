@@ -31,24 +31,24 @@ var adaptor = function () {
 		
 		init : function(func){
 			switch(adaptor.getBrowser()){
-			case adaptor.browserType.chrome:
-				window.addEventListener("load", function(){func();}, false);
-				break;
-			case adaptor.browserType.firefox:
-				adaptor.loadjQuery(adaptor);
-				window.addEventListener("load", function(){		
-					var appcontent = document.getElementById("appcontent");   // browser
-					if(appcontent)
-						appcontent.addEventListener("DOMContentLoaded", function(sender){
-							 var doc = sender.originalTarget; // doc is document that triggered "onload" event
-							 //if(doc.location != content.document.location) return;
-					         // if (doc.nodeName == "#document") return; // only douments
-					         if (doc.defaultView != doc.defaultView.top) return; //only top window.
-					         if (doc.defaultView.frameElement) return; // skip iframes/frames
-							 func(doc);
-						}, true);					
-				}, false);
-				break;
+				case adaptor.browserType.chrome:
+					window.addEventListener("load", function(){func();}, false);
+					break;
+				case adaptor.browserType.firefox:
+					adaptor.loadjQuery(adaptor);
+					window.addEventListener("load", function(){		
+						var appcontent = document.getElementById("appcontent");   // browser
+						if(appcontent)
+							appcontent.addEventListener("DOMContentLoaded", function(sender){
+								 var doc = sender.originalTarget; // doc is document that triggered "onload" event
+								 //if(doc.location != content.document.location) return; // only fire event on currently open tab
+						         // if (doc.nodeName == "#document") return; // only douments
+						         if (doc.defaultView != doc.defaultView.top) return; //only top window.
+						         if (doc.defaultView.frameElement) return; // skip iframes/frames
+								 func(doc);
+							}, true);					
+					}, false);
+					break;
 			}
 		},
 		
@@ -63,7 +63,7 @@ var adaptor = function () {
 					break;
 					
 				default:
-					utility.ajaxSend(ajaxRequest, callback);
+					utility.ajax(ajaxRequest, callback);
 					break;			
 			}			
 		},

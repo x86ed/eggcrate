@@ -1,13 +1,13 @@
-var facebook = function() {
+var twitter = function() {
 	
-	return{
+	return{	
 		
 		parseOauth : function(response){
-			return "parsed oauth";
+			return "parsed twitter oauth";
 		},
 		
 		parseScrape : function(response){
-			return "parsed scrape";
+			return "parsed twitter scrape";
 		},
 		
 		assembleURL : function(method, source){
