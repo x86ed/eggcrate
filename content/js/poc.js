@@ -4,6 +4,7 @@ var poc = function () {
 		
 		init : function(doc){
 			adaptor.initjQuery();
+			poc.addFeedContainer(doc);
 			poc.run(doc);
 		},
 					
@@ -24,38 +25,62 @@ var poc = function () {
 					style.href = "chrome://eggcrate/skin/skin.css";
 					head.appendChild(style);
 				}	
-						
-			for (var i=0, il=allLinks.length; i<il; i++) {
-				elm = allLinks[i];
-				if (elm.getAttribute("target")) {
-					elm.className += ((elm.className.length > 0)? " " : "") + "link-target-finder-selected";
-					foundLinks++;
-				}
-			}
-			/*
-			if (foundLinks === 0) {
-				alert("No links found with a target attribute");
-			}
-			else {
-				alert("Found " + foundLinks + " links with a target attribute");
-			}	
-			*/
-			//facebook.getFeed(utility.method.rss, "http://www.reddit.com/.rss", poc.callback);
-			utility.getFeed(utility.method.rss, utility.service.other, "http://www.reddit.com/.rss", poc.callback);
+			
+			basket = [new Egg("reddit", "http://www.reddit.com/.rss", utility.method.rss, utility.service.other),
+			          new Egg("tosh.0", "http://www.facebook.com/feeds/page.php?id=100834231907&format=rss20", utility.method.rss, utility.service.facebook),
+			          new Egg("gizmodo", "http://feeds.gawker.com/gizmodo/full", utility.method.rss, utility.service.other)];
+			
+			console.log(basket);
+			
+			index = 0;
+			setInterval(function(){
+
+				console.log(basket[index].name);
+
+				basket[index].getItems(function(){
+					poc.setFeedContainerContent(basket[index])
+				});
+				
+				index += 1;
+				
+				if(index >= basket.length)
+					index = 0;				
+			}, 10000);
+			
+			
+			setInterval(poc.randomColor, 500);
 		},
 		
 		callback : function(msg){
-			alert(JSON.stringify(msg));
+			DOM = adaptor.getDOM();
+			eggcrate = $('#eggcrate', DOM);
+			eggcrate.html(JSON.stringify(msg));
+		},
+		
+		setFeedContainerContent : function(egg){
+			console.log(JSON.stringify(egg));
+			DOM = adaptor.getDOM();
+			eggcrate = $('#eggcrate', DOM);
+			eggcrate.html(egg.name + "<br/>" + JSON.stringify(egg.items));
+		},
+		
+		addFeedContainer : function(DOM){
+			body = $('body', DOM);
+			body.append( ' <div id="eggcrate"></div> ' );
+		},
+		
+		randomColor : function(){
+			DOM = adaptor.getDOM();
+			eggcrate = $('#eggcrate', DOM);
+			eggcrate.css("background", "#" + Math.round(0xffffff * Math.random()).toString(16));
 		},
 		
 		clock : function(DOM){
 			body = $('body', DOM);
-			body.css('color', 'red');
-			body.append( ' <div>hello asshole 3</div> ' );
 			
 			return;
 			
-			$('body').prepend('<canvas style="position:absolute;top:0;left:0" id="canvas1" width="200" height="200"></canvas>')
+			body.prepend('<canvas style="position:absolute;top:0;left:0" id="canvas1" width="200" height="200"></canvas>')
 			
 			function sketchProc(processing) {  
 			// Override draw function, by default it will be called 60 times per second  

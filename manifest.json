@@ -18,7 +18,8 @@
 				                        "http://*/*",
 				                        "https://*/*"
 				                        ],
-				            "js" : ["content/js/adaptor.js",
+				            "js" : ["content/js/services/egg.js",
+				                    "content/js/adaptor.js",
 				                    "content/js/services/utility.js",
 				                    "content/js/services/facebook.js",				                    
 				            		"content/js/jquery-1.6.1.min.js",

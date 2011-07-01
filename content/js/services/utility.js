@@ -101,7 +101,6 @@ var utility = function() {
 				feed.link = channel.getElementsByTagName('link').item(0).firstChild.data;
 				feed.items = [];
 			
-				// Browse items
 				items = channel.getElementsByTagName('item');
 				
 				for(var i in items){					
