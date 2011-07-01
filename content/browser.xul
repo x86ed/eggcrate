@@ -4,6 +4,7 @@
 <overlay id="sample" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
 		
 		<script src="js/adaptor.js" />
+		<script src="js/services/egg.js" />
 		<script src="js/services/utility.js" />
 		<script src="js/services/facebook.js" />
 		<script src="js/jquery-1.6.1.min.js" />
