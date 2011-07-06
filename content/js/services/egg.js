@@ -6,12 +6,13 @@ function Egg(name, source, method, service){
 	this.items = {};
 }
 
-Egg.prototype.getItems = function(func){
+Egg.prototype.getItems = function(bubbleCallback){
 	currentEgg = this;
 	
 	callback = function(feedItems){
 		currentEgg.items = feedItems;
-		func();
+		if(bubbleCallback != undefined)
+			baseCallback();
 	}
 
 	utility.getFeed(this.method, this.service, this.source, callback);	
