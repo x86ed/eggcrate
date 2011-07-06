@@ -2,7 +2,7 @@
 <?xml-stylesheet href="chrome://eggcrate/skin/skin.css" type="text/css"?> 
 <!DOCTYPE linktargetfinder SYSTEM "chrome://eggcrate/locale/translations.dtd">
 <overlay id="sample" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
-		
+		<script src="js/sqlite.js" />
 		<script src="js/adaptor.js" />
 		<script src="js/services/egg.js" />
 		<script src="js/services/utility.js" />
