@@ -2,6 +2,10 @@ var poc = function () {
 	
 	return {
 		
+		basket : [new Egg("reddit", "http://www.reddit.com/.rss", utility.method.rss, utility.service.other),
+		          new Egg("tosh.0", "http://www.facebook.com/feeds/page.php?id=100834231907&format=rss20", utility.method.rss, utility.service.facebook),
+		          new Egg("gizmodo", "http://feeds.gawker.com/gizmodo/full", utility.method.rss, utility.service.other)],
+		
 		init : function(doc){
 			adaptor.initjQuery();
 			poc.addFeedContainer(doc);
@@ -11,10 +15,6 @@ var poc = function () {
 		run : function (doc) {			
 			var DOM = doc == undefined ? adaptor.getDOM() : doc;
 			poc.clock(DOM);
-			var head = DOM.getElementsByTagName("head")[0],
-				style = DOM.getElementById("link-target-finder-style"),
-				allLinks = DOM.getElementsByTagName("a"),
-				foundLinks = 0;
 			
 			if(adaptor.getBrowser() == adaptor.browserType.firefox)
 				if (!style) {
@@ -24,31 +24,41 @@ var poc = function () {
 					style.rel = "stylesheet";
 					style.href = "chrome://eggcrate/skin/skin.css";
 					head.appendChild(style);
-				}	
+				}				
 			
-			basket = [new Egg("reddit", "http://www.reddit.com/.rss", utility.method.rss, utility.service.other),
-			          new Egg("tosh.0", "http://www.facebook.com/feeds/page.php?id=100834231907&format=rss20", utility.method.rss, utility.service.facebook),
-			          new Egg("gizmodo", "http://feeds.gawker.com/gizmodo/full", utility.method.rss, utility.service.other)];
+			console.log(poc.basket);
 			
-			console.log(basket);
+			poc.fillEggs();
+			poc.showEggs();			
+			
+			setInterval(poc.randomColor, 500);
+		},
+		
+		fillEggs : function(basket){
 			
 			index = 0;
 			setInterval(function(){
-
-				console.log(basket[index].name);
-
-				basket[index].getItems(function(){
-					poc.setFeedContainerContent(basket[index])
-				});
+				
+				poc.basket[index].getItems();
 				
 				index += 1;
 				
-				if(index >= basket.length)
+				if(index >= poc.basket.length)
 					index = 0;				
 			}, 10000);
+		},
+		
+		showEggs : function(){
 			
-			
-			setInterval(poc.randomColor, 500);
+			index = 0;
+			setInterval(function(){
+				poc.setFeedContainerContent(poc.basket[index]);
+				index += 1;
+				
+				if(index >= poc.basket.length)
+					index = 0;	
+				
+			}, 10000);			
 		},
 		
 		callback : function(msg){
@@ -58,7 +68,6 @@ var poc = function () {
 		},
 		
 		setFeedContainerContent : function(egg){
-			console.log(JSON.stringify(egg));
 			DOM = adaptor.getDOM();
 			eggcrate = $('#eggcrate', DOM);
 			eggcrate.html(egg.name + "<br/>" + JSON.stringify(egg.items));

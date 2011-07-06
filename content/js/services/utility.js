@@ -29,9 +29,7 @@ var utility = function() {
 			
 		},
 		
-		getFeed : function(method, service, source, func){
-			console.log("get feed");
-			
+		getFeed : function(method, service, source, bubbleCallback){
 			url = utility.assembleURL(method, service, source);
 			
 			if(url == null) return;
@@ -44,14 +42,13 @@ var utility = function() {
 			
 			callback = function(response){
 				
-				utility.getFeedComplete(response, service, method, func);
+				utility.getFeedComplete(response, service, method, bubbleCallback);
 			};
 			
 			adaptor.ajaxRequest(request, callback);
 		},
 		
-		getFeedComplete : function(response, service, method, func){
-			console.log("get feed complete");
+		getFeedComplete : function(response, service, method, callback){
 			switch(service){
 				case utility.service.facebook:
 					feedItems = facebook.parseResponse(response, method);
@@ -66,18 +63,15 @@ var utility = function() {
 					break;
 			}
 			
-			func(feedItems);
+			callback(feedItems);
 		},
 		
 		ajax : function(ajaxRequest, callback){
-			console.log("ajax - actual call");
-			console.log(ajaxRequest);
 			var httpObject = new XMLHttpRequest();
 			
 			if (httpObject != null) {
 				httpObject.onreadystatechange = function(){
 					if (httpObject.readyState==4 && httpObject.status==200){
-						console.log(httpObject);
 						callback(httpObject.responseText);						
 					}
 				}
