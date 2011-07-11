@@ -42,7 +42,7 @@ var adaptor = function () {
 							appcontent.addEventListener("DOMContentLoaded", function(sender){
 								 var doc = sender.originalTarget; // doc is document that triggered "onload" event
 								 //if(doc.location != content.document.location) return; // only fire event on currently open tab
-						         // if (doc.nodeName == "#document") return; // only douments
+						         //if (doc.nodeName == "#document") return; // only douments
 						         if (doc.defaultView != doc.defaultView.top) return; //only top window.
 						         if (doc.defaultView.frameElement) return; // skip iframes/frames
 								 func(doc);
@@ -87,7 +87,38 @@ var adaptor = function () {
 			var jQuery = window.jQuery.noConflict(true);
     			if( typeof(jQuery.fn._init) == 'undefined') { jQuery.fn._init = jQuery.fn.init; }
 			adaptor.jQuery = jQuery;
-		}		
-
-	}	
+		},
+		
+		getDatabaseConnection : function(){
+			
+			switch(adaptor.getBrowser()){
+				case adaptor.browserType.firefox:				
+					file = Components.classes["@mozilla.org/file/directory_service;1"]
+								.getService(Components.interfaces.nsIProperties)
+								.get("ProfD", Components.interfaces.nsIFile);
+					
+					file.append("storage.sqlite");
+								
+					storageService = Components.classes["@mozilla.org/storage/service;1"]
+								.getService(Components.interfaces.mozIStorageService);
+					
+					return storageService.openDatabase(file);
+				
+				case adaptor.browserType.chrome:
+					databaseOptions = {
+										fileName: "storage.sqlite",
+										version: "1.0",
+										displayName: "Eggcrate Database",
+										maxSize: 1024
+										};
+					
+					return openDatabase(
+										databaseOptions.fileName,
+										databaseOptions.version,
+										databaseOptions.displayName,
+										databaseOptions.maxSize
+										);
+			}
+		}			
+	}
 }();

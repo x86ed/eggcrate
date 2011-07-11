@@ -18,9 +18,11 @@
 				                        "http://*/*",
 				                        "https://*/*"
 				                        ],
-				            "js" : ["content/js/sqlite.js"
-				            		"content/js/services/egg.js",
+				            "js" : ["content/js/services/egg.js",
+				            		"content/js/services/basket.js",
 				                    "content/js/adaptor.js",
+				                    "content/js/DbAdaptor.js",
+				                    "content/js/sqlite.js",
 				                    "content/js/services/utility.js",
 				                    "content/js/services/facebook.js",				                    
 				            		"content/js/jquery-1.6.1.min.js",
