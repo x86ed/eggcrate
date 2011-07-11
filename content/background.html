@@ -16,6 +16,9 @@
 			case "ajax":			
 				utility.ajax(request.ajaxRequest, callback);
 				break;
+			case "sqlite":			
+				utility.ajax(request.sqliteRequest, callback);
+				break;
 			default:
 				console.log("request not handled");
 				callback();

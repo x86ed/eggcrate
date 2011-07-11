@@ -9,9 +9,9 @@ var utility = function() {
 		},
 		
 		service : {
-			facebook : "faecbook",
-			twitter : "twitter",
-			other : "other"
+			facebook : "Facebook",
+			twitter : "Twitter",
+			other : "Other"
 		},
 		
 		assembleURL : function(method, service, source){
@@ -25,13 +25,14 @@ var utility = function() {
 				
 				case utility.service.other:
 					return method == utility.method.rss ? source : null;
+				default:
+					return null;
 			}
 			
 		},
 		
 		getFeed : function(method, service, source, bubbleCallback){
 			url = utility.assembleURL(method, service, source);
-			
 			if(url == null) return;
 			
 			request = {
@@ -40,29 +41,27 @@ var utility = function() {
 					source : source
 			};
 			
-			callback = function(response){
-				
-				utility.getFeedComplete(response, service, method, bubbleCallback);
-			};
-			
-			adaptor.ajaxRequest(request, callback);
+			adaptor.ajaxRequest(request, function(httpResponse){
+				utility.getFeedComplete(httpResponse, service, method, bubbleCallback);
+			});
 		},
 		
-		getFeedComplete : function(response, service, method, callback){
+		getFeedComplete : function(httpResponse, service, method, callback){
 			switch(service){
 				case utility.service.facebook:
-					feedItems = facebook.parseResponse(response, method);
+					feedItems = facebook.parseResponse(httpResponse, method);
 					break;					
 				
 				case utility.service.twitter:
-					feedItems = twitter.parseResponse(response, method);
+					feedItems = twitter.parseResponse(httpResponse, method);
 					break;	
 				
 				case utility.service.other:
-					feedItems = utility.parseRss(response);
+					feedItems = utility.parseRss(httpResponse);
 					break;
+				default:
+					alert("service not found");
 			}
-			
 			callback(feedItems);
 		},
 		
@@ -72,6 +71,7 @@ var utility = function() {
 			if (httpObject != null) {
 				httpObject.onreadystatechange = function(){
 					if (httpObject.readyState==4 && httpObject.status==200){
+						console.log(httpObject.responseText)
 						callback(httpObject.responseText);						
 					}
 				}
@@ -80,35 +80,30 @@ var utility = function() {
 			}
 		},
 		
-		parseRss : function(response){
-			
+		parseRss : function(httpResponse){			
 			parser = new DOMParser();
-			xmlDoc = parser.parseFromString(response,"text/xml");
+			xmlDoc = parser.parseFromString(httpResponse,"text/xml");
 			
-			feed = {};
+			feed = {};			
+ 	
+			channel = xmlDoc.getElementsByTagName('channel').item(0);
+			feed.title = channel.getElementsByTagName('title').item(0).firstChild.data;
+			feed.link = channel.getElementsByTagName('link').item(0).firstChild.data;
+			feed.items = [];
+		
+			items = channel.getElementsByTagName('item');
 			
-			// if data is valid
-			if (response.indexOf('invalid') == -1) 
-			{ 	
-				channel = xmlDoc.getElementsByTagName('channel').item(0);
-				feed.title = channel.getElementsByTagName('title').item(0).firstChild.data;
-				feed.link = channel.getElementsByTagName('link').item(0).firstChild.data;
-				feed.items = [];
-			
-				items = channel.getElementsByTagName('item');
-				
-				for(var i in items){					
-					if(typeof(items[i]) == "object"){
-						var item = {
-								title : items[i].getElementsByTagName("title").item(0).firstChild.data,
-								link : items[i].getElementsByTagName("link").item(0).firstChild.data,
-								pubDate : items[i].getElementsByTagName("pubDate").item(0).firstChild.data
-							};
-						
-						feed.items.push(item);
-					}
-				}				
-			}
+			for(var i in items){					
+				if(typeof(items[i]) == "object"){
+					var item = {
+							title : items[i].getElementsByTagName("title").item(0).firstChild.data,
+							link : items[i].getElementsByTagName("link").item(0).firstChild.data,
+							pubDate : items[i].getElementsByTagName("pubDate").item(0).firstChild.data
+						};
+					
+					feed.items.push(item);
+				}
+			}				
 			
 			return feed;
 		}
