@@ -87,38 +87,6 @@ var adaptor = function () {
 			var jQuery = window.jQuery.noConflict(true);
     			if( typeof(jQuery.fn._init) == 'undefined') { jQuery.fn._init = jQuery.fn.init; }
 			adaptor.jQuery = jQuery;
-		},
-		
-		getDatabaseConnection : function(){
-			
-			switch(adaptor.getBrowser()){
-				case adaptor.browserType.firefox:				
-					file = Components.classes["@mozilla.org/file/directory_service;1"]
-								.getService(Components.interfaces.nsIProperties)
-								.get("ProfD", Components.interfaces.nsIFile);
-					
-					file.append("storage.sqlite");
-								
-					storageService = Components.classes["@mozilla.org/storage/service;1"]
-								.getService(Components.interfaces.mozIStorageService);
-					
-					return storageService.openDatabase(file);
-				
-				case adaptor.browserType.chrome:
-					databaseOptions = {
-										fileName: "storage.sqlite",
-										version: "1.0",
-										displayName: "Eggcrate Database",
-										maxSize: 1024
-										};
-					
-					return openDatabase(
-										databaseOptions.fileName,
-										databaseOptions.version,
-										databaseOptions.displayName,
-										databaseOptions.maxSize
-										);
-			}
 		}			
 	}
 }();

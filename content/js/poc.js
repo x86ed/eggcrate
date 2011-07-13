@@ -51,6 +51,10 @@ var poc = function () {
 //				}
 //			});
 			
+			poc.basket.getEggs(function(){
+				console.log("poc basket get eggs")
+			});
+			
 			poc.fillEggs();
 			poc.showEggs();
 			
@@ -60,21 +64,8 @@ var poc = function () {
 		fillEggs : function(){
 			console.log("fill eggs")
 			index = 0;
-			setInterval(function(){				
-				if(!poc.basket.eggs[index])
-					index = 0;
-				
-				if(index == 0){
-					poc.basket.getEggs(function(){
-						console.log("poc basket get eggs")
-						console.log(poc.basket)
-					});
-				}
-				
-				if(poc.basket.eggs[index])
-					poc.basket.eggs[index].getItems();
-				
-				index += 1;
+			setInterval(function(){		
+				poc.basket.fillEggs();
 				
 			}, 5000);
 		},

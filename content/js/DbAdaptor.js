@@ -1,10 +1,48 @@
 function DbAdaptor(){	
-	this.db = adaptor.getDatabaseConnection();
+	this.db = {}//adaptor.getDatabaseConnection();
+}
+
+DbAdaptor.prototype.open = function(){
+	
+	var dbAdaptor = this; 
+	
+	switch(adaptor.getBrowser()){
+		case adaptor.browserType.firefox:				
+			file = Components.classes["@mozilla.org/file/directory_service;1"]
+						.getService(Components.interfaces.nsIProperties)
+						.get("ProfD", Components.interfaces.nsIFile);
+			
+			file.append("storage.sqlite");
+						
+			storageService = Components.classes["@mozilla.org/storage/service;1"]
+						.getService(Components.interfaces.mozIStorageService);
+			
+			dbAdaptor.db = storageService.openDatabase(file);
+			break;
+			
+		case adaptor.browserType.chrome:
+			databaseOptions = {
+								fileName: "storage.sqlite",
+								version: "1.0",
+								displayName: "Eggcrate Database",
+								maxSize: 1024
+								};
+			
+			dbAdaptor.db = openDatabase(
+								databaseOptions.fileName,
+								databaseOptions.version,
+								databaseOptions.displayName,
+								databaseOptions.maxSize
+								);
+	}
+
 }
 
 DbAdaptor.prototype.executeSql = function(sql, parameters, bubbleCallback){
-
-	var db = adaptor.getDatabaseConnection();//this.db;
+	
+	this.open();
+	
+	var db = this.db;
 	
 	callback = function(result){
 		if(bubbleCallback != null && bubbleCallback != undefined){	
