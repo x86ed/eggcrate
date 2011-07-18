@@ -105,7 +105,6 @@ var poc = function () {
 		clock : function(DOM){
 			body = $('body', DOM);
 			
-			return;
 			
 			body.prepend('<canvas style="position:absolute;top:0;left:0" id="canvas1" width="200" height="200"></canvas>')
 			
