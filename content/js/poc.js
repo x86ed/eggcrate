@@ -105,7 +105,6 @@ var poc = function () {
 		clock : function(DOM){
 			body = $('body', DOM);
 			
-			
 			body.prepend('<canvas style="position:absolute;top:0;left:0" id="canvas1" width="200" height="200"></canvas>')
 			
 			function sketchProc(processing) {  
@@ -146,8 +145,14 @@ var poc = function () {
 			// attaching the sketchProc function to the canvas  
 			var p = new Processing(canvas, sketchProc, adaptor.getDOM());  
 			  //p.exit(); to detach it 
-			$('body').click(function(){
-			  $("#canvas1").animate({ left: '+=' + (10 * Math.random()), top: '+='+ (10 * Math.random())},5000);
+			
+			DOM = adaptor.getDOM();
+			
+			$('body', DOM).click(function(){
+				
+				alert("body click");
+				
+			  $("#canvas1", DOM).animate({ left: '+=' + (10 * Math.random()), top: '+='+ (10 * Math.random())},5000, function (){alert("11");});
 			});
 		}
 	};

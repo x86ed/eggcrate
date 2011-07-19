@@ -11,8 +11,7 @@
 ***/
 (function(window, document, Math, nop, undef) {
 	
-			alert(navigator.userAgent);
-			console.log(navigator.userAgent);
+  console.log(navigator.userAgent);
 	
   var DOM = adaptor.getDOM();
   
@@ -17166,7 +17165,7 @@
 
       // the onfocus and onblur events are handled in two parts.
       // 1) the p.focused property is handled per sketch
-     /* curElement.onfocus = function() {
+      /*curElement.onfocus = function() {
         p.focused = true;
       };
 
