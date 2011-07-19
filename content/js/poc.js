@@ -141,10 +141,10 @@ var poc = function () {
 			  };  
 			    
 			}  
-			var canvas = document.getElementById("canvas1");
+			var canvas = DOM.getElementById("canvas1");
 			//var canvas = $("#canvas1");  
 			// attaching the sketchProc function to the canvas  
-			var p = new Processing(canvas, sketchProc);  
+			var p = new Processing(canvas, sketchProc, adaptor.getDOM());  
 			  //p.exit(); to detach it 
 			$('body').click(function(){
 			  $("#canvas1").animate({ left: '+=' + (10 * Math.random()), top: '+='+ (10 * Math.random())},5000);
