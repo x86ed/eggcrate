@@ -8,15 +8,13 @@ var adaptor = function () {
 		
 		getBrowser : function(){
 			if(navigator.userAgent.indexOf(adaptor.browserType.firefox) != -1)
-				return adaptor.browserType.firefox;
-			
+				return adaptor.browserType.firefox;	
 			if(navigator.userAgent.indexOf(adaptor.browserType.chrome) != -1)
 				return adaptor.browserType.chrome;
 		},
 		
 		getDOM : function(){
-			dom = null;
-			
+			dom = null;	
 			switch(adaptor.getBrowser()){
 				case adaptor.browserType.chrome:
 					dom = document;
@@ -25,7 +23,11 @@ var adaptor = function () {
 					if(content != null)
 						dom = content.document;
 					break;
+				default:
+					dom = content.document;
+					break;
 			}
+			console.log(dom);
 			return dom;
 		},
 		
@@ -45,6 +47,7 @@ var adaptor = function () {
 						         //if (doc.nodeName == "#document") return; // only douments
 						         if (doc.defaultView != doc.defaultView.top) return; //only top window.
 						         if (doc.defaultView.frameElement) return; // skip iframes/frames
+								adaptor.loadProcessing();
 								 func(doc);
 							}, true);					
 					}, false);
@@ -87,6 +90,10 @@ var adaptor = function () {
 			var jQuery = window.jQuery.noConflict(true);
     			if( typeof(jQuery.fn._init) == 'undefined') { jQuery.fn._init = jQuery.fn.init; }
 			adaptor.jQuery = jQuery;
+		},			
+		loadProcessing : function(){
+			var loader = Components.classes["@mozilla.org/moz/jssubscript-loader;1"].getService(Components.interfaces.mozIJSSubScriptLoader);
+			loader.loadSubScript("chrome://eggcrate/content/js/processing-1.2.1.js");
 		}			
 	}
 }();
