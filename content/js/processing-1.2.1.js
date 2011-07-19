@@ -9,17 +9,13 @@
     http://processingjs.org
 
 ***/
-
-var DOM = adaptor.getDOM();
-  
-  alert(DOM);
-
 (function(window, document, Math, nop, undef) {
 	
+			alert(navigator.userAgent);
+			console.log(navigator.userAgent);
 	
   var DOM = adaptor.getDOM();
   
-  alert(DOM);
   
   var debug = (function() {
     if ("console" in window) {
@@ -17170,7 +17166,7 @@ var DOM = adaptor.getDOM();
 
       // the onfocus and onblur events are handled in two parts.
       // 1) the p.focused property is handled per sketch
-      curElement.onfocus = function() {
+     /* curElement.onfocus = function() {
         p.focused = true;
       };
 
@@ -17179,7 +17175,7 @@ var DOM = adaptor.getDOM();
         if (!curSketch.options.globalKeyEvents) {
           resetKeyPressed();
         }
-      };
+      };*/
 
       // 2) looping status is handled per page, based on the pauseOnBlur @pjs directive
       if (curSketch.options.pauseOnBlur) {
