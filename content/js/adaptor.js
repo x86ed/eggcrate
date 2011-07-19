@@ -86,7 +86,7 @@ var adaptor = function () {
 		
 		loadjQuery : function(context){
 			var loader = Components.classes["@mozilla.org/moz/jssubscript-loader;1"].getService(Components.interfaces.mozIJSSubScriptLoader);
-			loader.loadSubScript("chrome://eggcrate/content/js/jquery-1.6.1.min.js",context);
+			loader.loadSubScript("chrome://eggcrate/content/js/jquery-1.6.2.js",context);
 			var jQuery = window.jQuery.noConflict(true);
     			if( typeof(jQuery.fn._init) == 'undefined') { jQuery.fn._init = jQuery.fn.init; }
 			adaptor.jQuery = jQuery;

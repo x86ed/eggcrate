@@ -25,9 +25,8 @@
 				                    "content/js/sqlite.js",
 				                    "content/js/services/utility.js",
 				                    "content/js/services/facebook.js",				                    
-				            		"content/js/jquery-1.6.1.min.js",
+				            		"content/js/jquery-1.6.2.js",
 				            		"content/js/processing-1.2.1.min.js", 
-				            		"content/js/processing-1.2.1-api.min.js", 
 				            		"content/js/content.js",
 				            		"content/js/poc.js"
 				            		],
