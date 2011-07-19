@@ -10,8 +10,17 @@
 
 ***/
 
-(function(window, document, Math, nop, undef) {
+var DOM = adaptor.getDOM();
+  
+  alert(DOM);
 
+(function(window, document, Math, nop, undef) {
+	
+	
+  var DOM = adaptor.getDOM();
+  
+  alert(DOM);
+  
   var debug = (function() {
     if ("console" in window) {
       return function(msg) {
@@ -1380,7 +1389,10 @@
   };
 
 
-  var Processing = this.Processing = function(curElement, aCode) {
+  var Processing = this.Processing = function(curElement, aCode, context) {
+	
+	DOM = context;  
+	  
     // Previously we allowed calling Processing as a func instead of ctor, but no longer.
     if (!(this instanceof Processing)) {
       throw("called Processing constructor as if it were a function: missing 'new'.");
@@ -1397,7 +1409,7 @@
     var pgraphicsMode = (arguments.length === 0);
     if (pgraphicsMode) {
       console.log(window)
-      curElement = content.document.createElement("canvas");
+      curElement = DOM.createElement("canvas");
       p.canvas = curElement;
     }
 
@@ -1589,11 +1601,13 @@
     // Get padding and border style widths for mouse offsets
     var stylePaddingLeft, stylePaddingTop, styleBorderLeft, styleBorderTop;
 
-    if (document.defaultView && document.defaultView.getComputedStyle) {
-      stylePaddingLeft = parseInt(document.defaultView.getComputedStyle(curElement, null)['paddingLeft'], 10)      || 0;
-      stylePaddingTop  = parseInt(document.defaultView.getComputedStyle(curElement, null)['paddingTop'], 10)       || 0;
-      styleBorderLeft  = parseInt(document.defaultView.getComputedStyle(curElement, null)['borderLeftWidth'], 10)  || 0;
-      styleBorderTop   = parseInt(document.defaultView.getComputedStyle(curElement, null)['borderTopWidth'], 10)   || 0;
+
+    
+    if (DOM.defaultView && DOM.defaultView.getComputedStyle) {
+      stylePaddingLeft = parseInt(DOM.defaultView.getComputedStyle(curElement, null)['paddingLeft'], 10)      || 0;
+      stylePaddingTop  = parseInt(DOM.defaultView.getComputedStyle(curElement, null)['paddingTop'], 10)       || 0;
+      styleBorderLeft  = parseInt(DOM.defaultView.getComputedStyle(curElement, null)['borderLeftWidth'], 10)  || 0;
+      styleBorderTop   = parseInt(DOM.defaultView.getComputedStyle(curElement, null)['borderTopWidth'], 10)   || 0;
     }
 
     // User can only have MAX_LIGHTS lights
@@ -12353,7 +12367,7 @@
     // texImage2D function changed http://www.khronos.org/webgl/public-mailing-list/archives/1007/msg00034.html
     // This method tries the new argument pattern first and falls back to the old version
     var executeTexImage2D = function () {
-      var canvas2d = document.createElement('canvas');
+      var canvas2d = DOM.createElement('canvas');
 
       try { // new way.
         curContext.texImage2D(curContext.TEXTURE_2D, 0, curContext.RGBA, curContext.RGBA, curContext.UNSIGNED_BYTE, canvas2d);
@@ -12398,7 +12412,7 @@
         var texture = curContext.createTexture();
         pimage.__texture = texture;
 
-        var cvs = document.createElement('canvas');
+        var cvs = DOM.createElement('canvas');
 
         var pot;
 
@@ -13437,7 +13451,7 @@
       p.save(frameFilename);
     };
 
-    var utilityContext2d = document.createElement("canvas").getContext("2d");
+    var utilityContext2d = DOM.createElement("canvas").getContext("2d");
 
     var canvasDataCache = [undef, undef, undef]; // we need three for now
 
@@ -13446,7 +13460,7 @@
 
       if (canvasData === undef) {
         canvasData = {};
-        canvasData.canvas = document.createElement("canvas");
+        canvasData.canvas = DOM.createElement("canvas");
         canvasData.context = canvasData.canvas.getContext('2d');
       }
 
@@ -13915,7 +13929,7 @@
       // else async load it
       else {
         pimg = new PImage();
-        var img = document.createElement('img');
+        var img = DOM.createElement('img');
 
         pimg.sourceImg = img;
 
@@ -15740,7 +15754,7 @@
       var lines = toP5String(str).split(/\r?\n/g), width = 0;
       var i, linesCount = lines.length;
       if (textcanvas === undef) {
-        textcanvas = document.createElement("canvas");
+        textcanvas = DOM.createElement("canvas");
       }
 
       var textContext = textcanvas.getContext("2d");
@@ -15757,7 +15771,7 @@
     };
 
     function MeasureTextCanvas(fontFace, fontSize, baseLine, text) {
-      this.canvas = document.createElement('canvas');
+      this.canvas = DOM.createElement('canvas');
       this.canvas.setAttribute('width', fontSize + "px");
       this.canvas.setAttribute('height', fontSize + "px");
       this.ctx = this.canvas.getContext("2d");
@@ -16043,7 +16057,7 @@
     Drawing3D.prototype.text$line = function(str, x, y, z, align) {
       // handle case for 3d text
       if (textcanvas === undef) {
-        textcanvas = document.createElement("canvas");
+        textcanvas = DOM.createElement("canvas");
       }
       var oldContext = curContext;
       curContext = textcanvas.getContext("2d");
@@ -16460,7 +16474,7 @@
         var xmlDoc;
 
         try {
-          xmlDoc = document.implementation.createDocument("", "", null);
+          xmlDoc = DOM.implementation.createDocument("", "", null);
         }
         catch(e_fx_op) {
           Processing.debug(e_fx_op.message);
@@ -17005,7 +17019,7 @@
 
     // Get the DOM element if string was passed
     if (typeof curElement === "string") {
-      curElement = content.document.getElementById(curElement);
+      curElement = DOM.getElementById(curElement);
     }
 
     // In order to catch key events in a canvas, it needs to be "specially focusable",
@@ -17264,7 +17278,7 @@
         */
         if (render === PConstants.WEBGL) {
           p.toImageData = function() { // 3D
-            var c = document.createElement("canvas");
+            var c = DOM.createElement("canvas");
             var ctx = c.getContext("2d");
             var obj = ctx.createImageData(this.width, this.height);
             var uBuff = new Uint8Array(this.width * this.height * 4);
@@ -18964,10 +18978,10 @@
     if (typeof tinylog !== undef && typeof tinylog[log] === func) {
       // pre-existing tinylog present
       tinylogLite[log] = tinylog[log];
-    } else if (typeof document !== undef && !document.fake) {
+    } else if (typeof DOM !== undef && !DOM.fake) {
       (function() {
         // DOM document
-        var doc = document,
+        var doc = DOM,
 
         $div = "div",
         $style = "style",
@@ -19266,12 +19280,12 @@
         if(!isDOMPresent) {
           return null;
         }
-        var element = document.createElement('p');
+        var element = DOM.createElement('p');
         element.style.fontFamily = "serif";
         element.style.fontSize = "72px";
         element.style.visibility = "hidden";
         element.innerHTML = "abcmmmmmmmmmmlll";
-        document.getElementsByTagName("body")[0].appendChild(element);
+        DOM.getElementsByTagName("body")[0].appendChild(element);
         return element;
       }()),
       // number of attempts to load a font
@@ -19288,7 +19302,7 @@
             this.attempt++;
           } else {
             // removes loaded font from the array and dom, so we don't compare it again
-            document.getElementsByTagName("body")[0].removeChild(this.fontList[i]);
+            DOM.getElementsByTagName("body")[0].removeChild(this.fontList[i]);
             this.fontList.splice(i--, 1);
             this.attempt = 0;
           }
@@ -19298,13 +19312,13 @@
           r = true;
           // remove remaining elements from the dom and array
           for (var j = 0; j < this.fontList.length; j++) {
-            document.getElementsByTagName("body")[0].removeChild(this.fontList[j]);
+            DOM.getElementsByTagName("body")[0].removeChild(this.fontList[j]);
             this.fontList.splice(j--, 1);
           }
         }
         // Remove the template element from the dom once done comparing
         if (r) {
-          document.getElementsByTagName("body")[0].removeChild(this.template);
+         DOM.getElementsByTagName("body")[0].removeChild(this.template);
         }
         return r;
       },
@@ -19313,7 +19327,7 @@
       // string containing a css @font-face list of custom fonts
       fontFamily: "",
       // style element to hold the @font-face string
-      style: (isDOMPresent ? document.createElement('style') : null),
+      style: (isDOMPresent ? DOM.createElement('style') : null),
       // adds a font to the font cache
       // creates an element using the font, to start loading the font,
       // and compare against a default font to see if the custom font is loaded
@@ -19327,14 +19341,14 @@
         // creating the @font-face style
         this.fontFamily += "@font-face{\n  font-family: '" + fontName + "';\n  src:  url('" + fontUrl + "');\n}\n";
         this.style.innerHTML = this.fontFamily;
-        document.getElementsByTagName("head")[0].appendChild(this.style);
+        DOM.getElementsByTagName("head")[0].appendChild(this.style);
         // creating the element to load, and compare the new font
-        var preLoader = document.createElement('p');
+        var preLoader = DOM.createElement('p');
         preLoader.style.fontFamily = "'" + fontName + "', serif";
         preLoader.style.fontSize = "72px";
         preLoader.style.visibility = "hidden";
         preLoader.innerHTML = "abcmmmmmmmmmmlll";
-        document.getElementsByTagName("body")[0].appendChild(preLoader);
+        DOM.getElementsByTagName("body")[0].appendChild(preLoader);
         this.fontList.push(preLoader);
       }
     };
@@ -19435,7 +19449,7 @@
    * Automatic initialization function.
    */
   var init = function() {
-    var canvas = document.getElementsByTagName('canvas');
+    var canvas = DOM.getElementsByTagName('canvas');
 
     for (var i = 0, l = canvas.length; i < l; i++) {
       // datasrc and data-src are deprecated.
@@ -19471,7 +19485,7 @@
    */
   Processing.disableInit = function() {
     if(isDOMPresent) {
-      document.removeEventListener('DOMContentLoaded', init, false);
+      DOM.removeEventListener('DOMContentLoaded', init, false);
     }
   };
 
@@ -19485,13 +19499,13 @@
    */
   Processing.disableInit = function() {
     if(isDOMPresent) {
-      document.removeEventListener('DOMContentLoaded', init, false);
+      DOM.removeEventListener('DOMContentLoaded', init, false);
     }
   };
 
   if(isDOMPresent) {
     window['Processing'] = Processing;
-    document.addEventListener('DOMContentLoaded', init, false);
+    DOM.addEventListener('DOMContentLoaded', init, false);
   } else {
     // DOM is not found
     this.Processing = Processing;
