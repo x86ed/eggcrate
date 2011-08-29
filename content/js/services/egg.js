@@ -8,17 +8,16 @@ function Egg(id, name, source, method, service){
 	this.items = {};
     this.getItems = function(bubbleCallback){
 	
-	currentEgg = this;
-    console.log("current egg")
-    console.log(currentEgg)
-
-	utility.getFeed(currentEgg.method, currentEgg.service, currentEgg.source,function(feedItems){
-		currentEgg.items = feedItems;
-		if(bubbleCallback != undefined){
-			console.log("bubbleCallback")
-			bubbleCallback();
-		}
-	} );
-    return this;
-}
+		var currentEgg = this;
+	
+		utility.getFeed(this.method, this.service, this.source, function(feedItems){
+			alert(currentEgg.name);
+			currentEgg.items = feedItems;
+			if(bubbleCallback != undefined){
+				console.log("bubbleCallback")
+				bubbleCallback();
+			}
+		} );
+	    return this;
+	}
 }
