@@ -1,3 +1,4 @@
+
 function Egg(id, name, source, method, service){
 	this.id = id;
 	this.name = name;
@@ -5,21 +6,19 @@ function Egg(id, name, source, method, service){
 	this.method = method;
 	this.service = service;
 	this.items = {};
-}
-
-Egg.prototype.getItems = function(bubbleCallback){
+    this.getItems = function(bubbleCallback){
 	
 	currentEgg = this;
-	
-	callback = function(feedItems){
+    console.log("current egg")
+    console.log(currentEgg)
+
+	utility.getFeed(currentEgg.method, currentEgg.service, currentEgg.source,function(feedItems){
 		currentEgg.items = feedItems;
 		if(bubbleCallback != undefined){
-			alert("bubbleCallback")
+			console.log("bubbleCallback")
 			bubbleCallback();
 		}
-	}
-
-	utility.getFeed(this.method, this.service, this.source, callback);	
+	} );
+    return this;
 }
-
-
+}
