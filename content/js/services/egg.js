@@ -11,7 +11,6 @@ function Egg(id, name, source, method, service){
 		var currentEgg = this;
 	
 		utility.getFeed(this.method, this.service, this.source, function(feedItems){
-			alert(currentEgg.name);
 			currentEgg.items = feedItems;
 			if(bubbleCallback != undefined){
 				console.log("bubbleCallback")
