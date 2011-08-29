@@ -12,7 +12,6 @@
 		<script src="js/services/processing-1.2.1.js" />
 		<script src="js/services/jquery-1.6.2.js" />
     		<script src="js/content.js"/>
-		<script src="js/poc.js" />
 		
 		<menupopup id="menu_ToolsPopup"> 
 			<menuitem label="&runlinktargetfinder;" key="link-target-finder-run-key" oncommand="poc.run()"/> 
