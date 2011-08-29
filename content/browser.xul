@@ -9,6 +9,8 @@
 		<script src="js/services/basket.js" />
 		<script src="js/services/egg.js" />
 		<script src="js/services/facebook.js" />
+		<script src="js/services/processing-1.2.1.js" />
+		<script src="js/services/jquery-1.6.2.js" />
     		<script src="js/content.js"/>
 		<script src="js/poc.js" />
 		

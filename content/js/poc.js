@@ -92,6 +92,7 @@ var poc = function () {
 		},
 		
 		addFeedContainer : function(DOM){
+			DOM = adaptor.getDOM();
 			body = $('body', DOM);
 			body.append( ' <div id="eggcrate"></div> ' );
 		},
@@ -103,7 +104,8 @@ var poc = function () {
 		},
 		
 		clock : function(DOM){
-			body = $('body', DOM);
+            body = document.getElementsByTagName('body')[0];
+			//body = $('body', DOM);
 			
 			body.prepend('<canvas style="position:absolute;top:0;left:0" id="canvas1" width="200" height="200"></canvas>')
 			
