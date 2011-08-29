@@ -8,7 +8,7 @@ function Egg(id, name, source, method, service){
 	this.items = {};
     this.getItems = function(bubbleCallback){
 	
-	currentEgg = this;
+	var currentEgg = this;
     console.log("current egg")
     console.log(currentEgg)
 
