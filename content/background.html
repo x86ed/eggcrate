@@ -29,7 +29,9 @@
 	// Wire up the listener.
 	chrome.extension.onRequest.addListener(onRequest);
 	 alert("there"); 
-     chrome.tabs.executeScript( null,{file:"http://216.193.225.203:4460/Scripts/test.js"}, function(){alert(1);alert(2)});
+    chrome.tabs.executeScript(
+                    null, {code:"document.body.style.background='red !important'"});
+
      alert("done");
     </script>
   </body>
