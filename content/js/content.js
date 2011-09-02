@@ -7,7 +7,6 @@ var poc = function () {
 		init : function(doc){			
 			adaptor.initjQuery();
 			sqlite.initDatabase(function(){
-				poc.addFeedContainer(doc);
 				sqlite.insertEgg("Tosh.0", 
 			              "http://www.facebook.com/feeds/page.php?id=100834231907&format=rss20",
 			              utility.method.rss,
@@ -26,6 +25,7 @@ var poc = function () {
 					
         // this needs to be modified to call dynamic objects
 		run : function (doc) {			
+			poc.addFeedContainer(doc);
 			var DOM = doc == undefined ? adaptor.getDOM() : doc;
 			//poc.clock(DOM);
 			
@@ -152,3 +152,4 @@ var poc = function () {
 }();
 
 adaptor.init(poc.init);
+
