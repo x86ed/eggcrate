@@ -1,5 +1,6 @@
 var adaptor = function () {
 	
+	
 	return {
 		browserType : {
 			chrome : "Chrome",
@@ -27,7 +28,6 @@ var adaptor = function () {
 					dom = content.document;
 					break;
 			}
-			console.log(dom);
 			return dom;
 		},
 		
