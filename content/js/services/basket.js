@@ -26,15 +26,10 @@ Basket.prototype.fillEggs = function(){
 	}
 }
 
-Basket.prototype.getEggs = function(bubbleCallback){
-	
-	console.log("get eggs")
-	
+Basket.prototype.getEggs = function(bubbleCallback){	
 	var currentBasket = this;
 	
 	sqlite.getBasket(function(eggs){
-		
-		console.log(eggs)
 		
 //		for(var i in eggs){
 //			if(!currentBasket.eggs.exists(eggs[i])){

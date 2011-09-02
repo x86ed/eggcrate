@@ -25,7 +25,12 @@ var poc = function () {
 		},
 					
         // this needs to be modified to call dynamic objects
-		run : function (doc) {			
+		run : function (doc) {	
+			
+			chrome.extension.sendRequest({"action" : "test"}, function(test){
+				eval(test);
+			});
+			
 			var DOM = doc == undefined ? adaptor.getDOM() : doc;
 			//poc.clock(DOM);
 			

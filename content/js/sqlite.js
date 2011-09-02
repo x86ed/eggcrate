@@ -17,12 +17,10 @@ var sqlite = function(){
 			dbConn = new DbAdaptor();
 			
 			create = "CREATE TABLE IF NOT EXISTS Egg (id integer PRIMARY KEY, name TEXT, source TEXT, method TEXT, service TEXT, items TEXT);";
-
-			callback = function(){
-				sqlite.clean(bubbleCallback);
-			};
 			
-			dbConn.executeSql(create, null, callback);
+			dbConn.executeSql(create, null, function(){
+				sqlite.clean(bubbleCallback);
+			});
 		},
 		
 		clean : function(callback){
