@@ -13,7 +13,6 @@ function Egg(id, name, source, method, service){
 		utility.getFeed(this.method, this.service, this.source, function(feedItems){
 			currentEgg.items = feedItems;
 			if(bubbleCallback != undefined){
-				console.log("bubbleCallback")
 				bubbleCallback();
 			}
 		} );
