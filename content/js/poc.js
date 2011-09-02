@@ -20,7 +20,10 @@ var poc = function () {
 			});			
 		},
 					
-		run : function (doc) {			
+		run : function (doc) {		
+			
+			
+			
 			var DOM = doc == undefined ? adaptor.getDOM() : doc;
 			poc.clock(DOM);
 			
@@ -52,7 +55,7 @@ var poc = function () {
 //			});
 			
 			poc.basket.getEggs(function(){
-				console.log("poc basket get eggs")
+				//console.log("poc basket get eggs")
 			});
 			
 			poc.fillEggs();
@@ -62,7 +65,7 @@ var poc = function () {
 		},
 		
 		fillEggs : function(){
-			console.log("fill eggs")
+			//console.log("fill eggs")
 			index = 0;
 			setInterval(function(){		
 				poc.basket.fillEggs();
@@ -71,7 +74,7 @@ var poc = function () {
 		},
 		
 		showEggs : function(){
-			console.log("show eggs")
+			//console.log("show eggs")
 			index = 0;
 			setInterval(function(){
 				if(!poc.basket.eggs[index])
