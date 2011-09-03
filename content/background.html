@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+  	<title></title>
+  </head>
+  <body>
+  	<script src="js/adaptor.js" type="text/javascript"></script>
+  	<script src="js/services/utility.js" type="text/javascript"></script>
+  	<script src="js/services/facebook.js" type="text/javascript"></script>  	
+    <script type="text/javascript">	
+    function Test(){
+		function X(){
+			this.init = function(){
+				alert("suck my balls");
+			}
+		}
+	
+		var x = new X();
+		x.init();
+	}
+	
+	function onRequest(request, sender, callback) {
+		console.log("request recieved: " + request.action);
+		switch(request.action){
+			case "test1":
+				callback(Test.toString());
+				break;
+			// case "ajax":			
+				// utility.ajax(request.ajaxRequest, callback);
+				// break;
+			// case "sqlite":			
+				// utility.ajax(request.sqliteRequest, callback);
+				// break;
+			// default:
+				// console.log("request not handled");
+				// callback();
+				// break;
+		}
+	};
+	
+	
+
+	// Wire up the listener.
+	chrome.extension.onRequest.addListener(onRequest);
+	  
+    </script>
+  </body>
+</html>
