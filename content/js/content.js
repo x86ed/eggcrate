@@ -32,6 +32,14 @@ var poc = function () {
 				Test();
 			});
 			
+//			chrome.extension.sendRequest({"action" : "test2"}, function(test){
+//				x = eval(test);
+//				alert(test);
+//				alert(x);
+//				vis = eval(x.visA);
+//				vis();
+//			});
+			
 			var DOM = doc == undefined ? adaptor.getDOM() : doc;
 			//poc.clock(DOM);
 			
